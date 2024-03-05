@@ -5,8 +5,8 @@ services:
       context: ./
       dockerfile: ./Dockerfile
     depends_on:
-      - mysql-container
-      - redis-container
+      - nest_project1_back_mysql-container_1
+      - nest_project1_back_redis-container_1
     ports:
       - 3005:3005
     networks:
