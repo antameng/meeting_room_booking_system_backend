@@ -1,17 +1,17 @@
 version: '3.8'
 services:
-  nest_project1_back_nest-app_1:
+  nest-app:
     build:
       context: ./
       dockerfile: ./Dockerfile
     depends_on:
-      - nest_project1_back_mysql-container_1
-      - nest_project1_back_redis-container_1
+      -mysql-container
+      -redis-container
     ports:
       - 3005:3005
     networks:
       - common-network
-  nest_project1_back_mysql-container_1:
+  mysql-container:
     image: mysql
     volumes:
       - /Users/guang/mysql-data:/var/lib/mysql
@@ -20,7 +20,7 @@ services:
       MYSQL_ROOT_PASSWORD: 520479
     networks:
       - common-network
-  nest_project1_back_redis-container_1:
+  redis-container:
     image: redis
     volumes:
       - /Users/guang/redis-data:/data
