@@ -5,8 +5,8 @@ services:
       context: ./
       dockerfile: ./Dockerfile
     depends_on:
-      -mysql-container
-      -redis-container
+      - mysql-container
+      - redis-container
     ports:
       - 3005:3005
     networks:
