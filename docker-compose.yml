@@ -17,7 +17,7 @@ services:
       - /Users/guang/mysql-data:/var/lib/mysql
     environment:
       MYSQL_DATABASE: meeting_room_booking_system
-      MYSQL_ROOT_PASSWORD: 520479
+      MYSQL_ROOT_PASSWORD: qwe!2345
     networks:
       - common-network
   redis-container:

@@ -28,22 +28,22 @@ import * as path from 'path';
         return {
           secret: configService.get('jwt_secret'),
           signOptions: {
-            expiresIn: '30m' // 默认 30 分钟
-          }
-        }
+            expiresIn: '30m', // 默认 30 分钟
+          },
+        };
       },
-      inject: [ConfigService]
+      inject: [ConfigService],
     }),
-    UserModule, 
+    UserModule,
     ConfigModule.forRoot({
       isGlobal: true,
       // envFilePath: 'src/.env'
-      envFilePath: path.join(__dirname, '.env')
+      envFilePath: path.join(__dirname, '.env'),
     }),
     TypeOrmModule.forRootAsync({
       useFactory(configService: ConfigService) {
         return {
-          type: "mysql",
+          type: 'mysql',
           host: configService.get('mysql_server_host'),
           port: configService.get('mysql_server_port'),
           username: configService.get('mysql_server_username'),
@@ -51,30 +51,33 @@ import * as path from 'path';
           database: configService.get('mysql_server_database'),
           synchronize: true,
           logging: true,
-          entities: [
-            User, Role, Permission, MeetingRoom, Booking
-          ],
+          entities: [User, Role, Permission, MeetingRoom, Booking],
           poolSize: 10,
           connectorPackage: 'mysql2',
           extra: {
-              authPlugin: 'sha256_password',
-          }
-        }
+            authPlugin: 'sha256_password',
+          },
+        };
       },
-      inject: [ConfigService]
-    }), RedisModule, EmailModule, MeetingRoomModule, BookingModule, StatisticModule
+      inject: [ConfigService],
+    }),
+    RedisModule,
+    EmailModule,
+    MeetingRoomModule,
+    BookingModule,
+    StatisticModule,
   ],
   controllers: [AppController],
   providers: [
     AppService,
     {
       provide: APP_GUARD,
-      useClass: LoginGuard
+      useClass: LoginGuard,
     },
     {
       provide: APP_GUARD,
-      useClass: PermissionGuard
-    }
-  ]
+      useClass: PermissionGuard,
+    },
+  ],
 })
 export class AppModule {}
